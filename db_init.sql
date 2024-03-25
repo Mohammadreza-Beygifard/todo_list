@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON todolist.* TO 'saman'@'%' IDENTIFIED BY 'saman1234';

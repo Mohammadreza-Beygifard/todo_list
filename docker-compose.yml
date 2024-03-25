@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  mmysql:
+    image: mysql
+    container_name: mysqldb
+    restart: always
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf # Mount custom MySQL configuration file
+      - ./mysql-init:/docker-entrypoint-initdb.d # Mount SQL initialization scripts
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todolist
+      MYSQL_USER: saman
+      MYSQL_PASSWORD: saman1234
+
+    ports:
+      - "3308:3306"
+    networks:
+      - spring_mysql
+
+  spring-boot-app:
+    container_name: springbootapp
+    build: ./demo
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mmysql
+    environment:
+      MYSQL_HOST: mmysql
+      MYSQL_USER: saman
+      MYSQL_PASSWORD: saman1234
+      MYSQL_PORT: 3306
+    networks:
+      - spring_mysql
+networks:
+  spring_mysql:
+    driver: bridge
