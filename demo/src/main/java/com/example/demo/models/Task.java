@@ -4,41 +4,41 @@ import jakarta.persistence.*;
 
 @Entity
 public class Task {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String task;
-    private boolean completed;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    public Task() {
-    }
+  private String task;
+  private boolean completed;
 
-    public Task(String task, boolean completed) {
-        this.task = task;
-        this.completed = completed;
-    }
+  public Task() {}
 
-    public Long getId() {
-        return id;
-    }
+  public Task(String task, boolean completed) {
+    this.task = task;
+    this.completed = completed;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public String getTask() {
-        return task;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setTask(String task) {
-        this.task = task;
-    }
+  public String getTask() {
+    return task;
+  }
 
-    public boolean isCompleted() {
-        return completed;
-    }
+  public void setTask(String task) {
+    this.task = task;
+  }
 
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
+  public boolean isCompleted() {
+    return completed;
+  }
+
+  public void setCompleted(boolean completed) {
+    this.completed = completed;
+  }
 }
