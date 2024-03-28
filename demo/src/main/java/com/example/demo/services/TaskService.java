@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.models.Task;
 import com.example.demo.repositories.TaskRepository;
 import java.util.List;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class TaskService {
   @Autowired private TaskRepository taskRepository;
 
-  public Task createNewTask(Task task) {
+  public Task createNewTask(@NonNull Task task) {
     return taskRepository.save(task);
   }
 
@@ -35,7 +36,7 @@ public class TaskService {
     taskRepository.delete(task);
   }
 
-  public Task updateTask(Task task) {
+  public Task updateTask(@NonNull Task task) {
     return taskRepository.save(task);
   }
 }
