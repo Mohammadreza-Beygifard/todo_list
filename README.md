@@ -1,4 +1,4 @@
-# todo_list docker compose Spring boot MySQL
+# todo_list docker compose Spring Boot MySQL
 
 ## Overview
 
