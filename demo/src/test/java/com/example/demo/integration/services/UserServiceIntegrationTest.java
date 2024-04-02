@@ -3,7 +3,7 @@ package com.example.demo.integration.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.demo.DemoApplication;
-import com.example.demo.models.User;
+import com.example.demo.models.UserEntity;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.services.UserService;
 import java.util.List;
@@ -23,11 +23,11 @@ public class UserServiceIntegrationTest {
 
   @Test
   public void testCreateUser() {
-    User user = new User("testUser", "testPassword");
+    UserEntity user = new UserEntity("testUser", "testPassword");
 
     userService.createUser(user);
 
-    List<User> users = userRepository.findAll();
+    List<UserEntity> users = userRepository.findAll();
 
     assertEquals(1, users.size());
     assertEquals(user.getUsername(), users.get(0).getUsername());
