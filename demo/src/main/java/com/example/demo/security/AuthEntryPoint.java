@@ -17,10 +17,7 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
       HttpServletResponse response,
       AuthenticationException authException)
       throws IOException, ServletException {
-    if (authException != null) {
-      response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, authException.getMessage());
-      return;
-    }
+
     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");
   }
 }

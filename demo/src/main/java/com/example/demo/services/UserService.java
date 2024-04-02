@@ -17,9 +17,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 
-@Service
+// No need to @Service as It is defined as a bean in the SecurityConfig
 public class UserService implements UserDetailsService {
 
   Logger logger = LoggerFactory.getLogger(UserService.class);
@@ -44,10 +43,6 @@ public class UserService implements UserDetailsService {
   public void deleteUser(@NonNull UserEntity user) {
 
     userRepository.delete(user);
-  }
-
-  public boolean matchesPassword(String rawPassword, String encodedPassword) {
-    return passwordEncoder.matches(rawPassword, encodedPassword);
   }
 
   @Override

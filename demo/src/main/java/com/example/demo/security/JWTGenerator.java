@@ -5,22 +5,22 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.security.Key;
+import java.time.Instant;
 // import java.security.KeyPair;
 import java.util.Date;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JWTGenerator {
-  // private static final KeyPair keyPair =
-  // Keys.keyPairFor(SignatureAlgorithm.RS256);
   private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-  public String generateToken(UserDetails userDetail) {
-    String username = userDetail.getUsername();
-    Date currentDate = new Date();
-    Date expireDate = new Date(currentDate.getTime() + SecurityConstants.EXPIRATION_TIME);
+  public String generateToken(Authentication authentication) {
+    String username = authentication.getName();
+    Instant currentInstant = Instant.now();
+    Instant expireInstant = currentInstant.plusSeconds(36000);
+    Date expireDate = Date.from(expireInstant);
 
     String token =
         Jwts.builder()

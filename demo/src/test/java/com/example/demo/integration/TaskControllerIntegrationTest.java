@@ -1,58 +1,41 @@
 package com.example.demo.integration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest
 @ActiveProfiles("test")
+@AutoConfigureMockMvc(addFilters = false)
 public class TaskControllerIntegrationTest {
 
-  String BASE_URL = "/api/v1/tasks";
+  String BASE_URL = "/api/v1/tasks/";
 
-  @LocalServerPort private int port;
-
-  @Autowired private TestRestTemplate restTemplate;
+  @Autowired private MockMvc mockMvc;
 
   @Test
-  public void testGetAllTasks() {
-
-    ResponseEntity<String> response =
-        restTemplate.getForEntity("http://localhost:" + port + BASE_URL + "/", String.class);
-    assertEquals(HttpStatus.OK, response.getStatusCode());
+  public void testGetAllTasks() throws Exception {
+    mockMvc.perform(get(BASE_URL)).andExpect(status().isOk());
   }
 
   @Test
-  public void testTaskCreate() {
-    String url = "http://localhost:" + port + BASE_URL + "/";
-
+  public void testTaskCreate() throws Exception {
     String requestBody = "{\"task\":\"Practice\",\"completed\":\"false\"}";
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_JSON);
-    HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
+    mockMvc
+        .perform(post(BASE_URL).contentType(MediaType.APPLICATION_JSON).content(requestBody))
+        .andExpect(status().isOk());
 
-    ResponseEntity<String> response =
-        restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
-
-    assertEquals(HttpStatus.OK, response.getStatusCode());
-
-    ResponseEntity<String> get_response = restTemplate.getForEntity(url, String.class);
-
-    assertEquals(HttpStatus.OK, get_response.getStatusCode());
-    String expected_response_body = "[{\"id\":1,\"task\":\"Practice\",\"completed\":false}]";
-    assertEquals(expected_response_body, get_response.getBody());
+    mockMvc
+        .perform(get(BASE_URL))
+        .andExpect(status().isOk())
+        .andExpect(content().json("[{\"id\":1,\"task\":\"Practice\",\"completed\":false}]"));
   }
 }
