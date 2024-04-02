@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Todo List web application repository! Here, you'll find a fully-functional application built using Spring Boot and MySQL, serving as a solid foundation for your server development projects.
+Welcome to the Todo List web application repository! Here, you'll find a fully functional application built using Spring Boot and MySQL, serving as a solid foundation for your server development projects.
 
 ### Dockerized Environment
 
@@ -41,6 +41,7 @@ This part provides an overview of the RESTful API endpoints available in the `Ta
 ### Overview
 
 The `TaskController` class defines endpoints for managing tasks. It provides functionalities to retrieve, create, update, and delete tasks.
+The `AuthenticationController` class defines the endpoints to register users and log into the application.
 
 ### Authentication
 
