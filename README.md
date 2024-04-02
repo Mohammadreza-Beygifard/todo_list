@@ -42,7 +42,60 @@ This part provides an overview of the RESTful API endpoints available in the `Ta
 
 The `TaskController` class defines endpoints for managing tasks. It provides functionalities to retrieve, create, update, and delete tasks.
 
-### Base URL
+### Authentication
+
+The Authentication Controller handles user authentication and registration within the application. It provides endpoints for user login and registration.
+
+#### Endpoints
+
+- **Login**: `/api/v1/auth/login`
+  - Method: `POST`
+  - Description: Authenticates a user with the provided credentials and generates a JWT token upon successful authentication.
+  - Request Body:
+    - `username`: Username of the user.
+    - `password`: Password of the user.
+  - Response:
+    - HTTP Status Code:
+      - `200 OK` - Successful authentication. Returns a JWT token in the response body.
+      - `401 Unauthorized` - Authentication failed.
+  - Sample Request:
+    ```json
+    {
+      "username": "exampleUser",
+      "password": "examplePassword"
+    }
+    ```
+  - Sample Response:
+    ```json
+    {
+    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjIiLCJpYXQiOjE3MTIwNjYxNzAsImV4cCI6MTcxMjEwMjE3MH0.Ad5l9PZBjfnJI2hFFoNN0Qy2Zp3r6i7z3w7PspQJEICg8HFUmspJMfNbYEyk51j1kSaKL10gVxoICcK3tTthIQ",
+    "tokenType": "Bearer "
+    }
+    ```
+
+- **Register**: `/api/v1/auth/register`
+  - Method: `POST`
+  - Description: Registers a new user in the system.
+  - Request Body:
+    - `username`: Username of the new user.
+    - `password`: Password of the new user.
+  - Response:
+    - HTTP Status Code:
+      - `200 OK` - User registration successful.
+  - Sample Request:
+    ```json
+    {
+      "username": "newUser",
+      "password": "newUserPassword"
+    }
+    ```
+
+### Authorization
+
+Requests to all controllers, except the AuthController, should include an Authorization Header with the generated JWT Token in the format Bearer <JWT Token>.
+
+
+### Task Controller
 
 The base URL for accessing the API endpoints is `/api/v1/tasks`.
 
@@ -124,5 +177,4 @@ DELETE /api/v1/tasks/{id}
 ### Notes
 - Replace `{id}` with the actual ID of the task when making requests to update or delete a specific task.
 - All endpoints return appropriate HTTP status codes to indicate the success or failure of the operation.
-- Ensure proper authentication and authorization mechanisms are implemented before deploying this API to production environments.
 - It is important to configure the my.cnf file to restrict remote connections to your database and only allow connections from specific IP addresses or ranges. This helps protect your database from unauthorized access.
