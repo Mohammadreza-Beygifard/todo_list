@@ -7,8 +7,8 @@ services:
     restart: always
     volumes:
       - ./db:/var/lib/mysql
-      - ./my.cnf:/etc/mysql/my.cnf # Mount custom MySQL configuration file
-      - ./mysql-init:/docker-entrypoint-initdb.d # Mount SQL initialization scripts
+      - ./my.cnf:/etc/mysql/my.cnf # DOUBLE CHECK THE CONF! Mount custom MySQL configuration file
+      - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql # Mount SQL initialization scripts
 
     environment:
       MYSQL_ROOT_PASSWORD: root

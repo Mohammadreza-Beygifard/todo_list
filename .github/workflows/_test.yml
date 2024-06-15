@@ -25,4 +25,4 @@ jobs:
       run: mvn -B package --file demo/pom.xml
 
     - name: Run tests
-      run: mvn test --file demo/pom.xml
+      run: mvn test --file demo/pom.xml -X

@@ -4,6 +4,10 @@
 
 Welcome to the Todo List web application repository! Here, you'll find a fully functional application built using Spring Boot and MySQL, serving as a solid foundation for your server development projects.
 
+## Tutorial
+
+For a detailed tutorial on how to use this project, check out the [YouTube playlist](https://www.youtube.com/playlist?list=PLyJPITz5u3sqmsxwE06ZM55zQCIhjqoX_).
+
 ### Dockerized Environment
 
 The entire application has been dockerized for easy deployment and management. To get started, ensure you have Docker installed on your machine by following the [official Docker documentation](https://docs.docker.com/engine/install/).
@@ -50,6 +54,7 @@ The Authentication Controller handles user authentication and registration withi
 #### Endpoints
 
 - **Login**: `/api/v1/auth/login`
+
   - Method: `POST`
   - Description: Authenticates a user with the provided credentials and generates a JWT token upon successful authentication.
   - Request Body:
@@ -69,8 +74,8 @@ The Authentication Controller handles user authentication and registration withi
   - Sample Response:
     ```json
     {
-    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjIiLCJpYXQiOjE3MTIwNjYxNzAsImV4cCI6MTcxMjEwMjE3MH0.Ad5l9PZBjfnJI2hFFoNN0Qy2Zp3r6i7z3w7PspQJEICg8HFUmspJMfNbYEyk51j1kSaKL10gVxoICcK3tTthIQ",
-    "tokenType": "Bearer "
+      "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMjIiLCJpYXQiOjE3MTIwNjYxNzAsImV4cCI6MTcxMjEwMjE3MH0.Ad5l9PZBjfnJI2hFFoNN0Qy2Zp3r6i7z3w7PspQJEICg8HFUmspJMfNbYEyk51j1kSaKL10gVxoICcK3tTthIQ",
+      "tokenType": "Bearer "
     }
     ```
 
@@ -95,7 +100,6 @@ The Authentication Controller handles user authentication and registration withi
 
 Requests to all controllers, except the AuthController, should include an Authorization Header with the generated JWT Token in the format Bearer <JWT Token>.
 
-
 ### Task Controller
 
 The base URL for accessing the API endpoints is `/api/v1/tasks`.
@@ -103,24 +107,28 @@ The base URL for accessing the API endpoints is `/api/v1/tasks`.
 ### Endpoints
 
 #### Get All Tasks
+
 - **Method**: `GET`
 - **URL**: `/`
 - **Description**: Retrieves all tasks.
 - **Response**: Returns a list of all tasks.
 
 #### Get All Completed Tasks
+
 - **Method**: `GET`
 - **URL**: `/completed`
 - **Description**: Retrieves all completed tasks.
 - **Response**: Returns a list of all completed tasks.
 
 #### Get All Incomplete Tasks
+
 - **Method**: `GET`
 - **URL**: `/incomplete`
 - **Description**: Retrieves all incomplete tasks.
 - **Response**: Returns a list of all incomplete tasks.
 
 #### Create Task
+
 - **Method**: `POST`
 - **URL**: `/`
 - **Description**: Creates a new task.
@@ -128,6 +136,7 @@ The base URL for accessing the API endpoints is `/api/v1/tasks`.
 - **Response**: Returns the created task.
 
 #### Update Task
+
 - **Method**: `PUT`
 - **URL**: `/{id}`
 - **Description**: Updates an existing task.
@@ -136,6 +145,7 @@ The base URL for accessing the API endpoints is `/api/v1/tasks`.
 - **Response**: Returns the updated task.
 
 #### Delete Task
+
 - **Method**: `DELETE`
 - **URL**: `/{id}`
 - **Description**: Deletes an existing task.
@@ -145,11 +155,13 @@ The base URL for accessing the API endpoints is `/api/v1/tasks`.
 ### Sample Usage
 
 #### Retrieve All Tasks
+
 ```
 GET /api/v1/tasks/
 ```
 
 #### Create New Task
+
 ```
 POST /api/v1/tasks/
 Request Body:
@@ -160,6 +172,7 @@ Request Body:
 ```
 
 #### Update Task
+
 ```
 PUT /api/v1/tasks/{id}
 Request Body:
@@ -171,11 +184,13 @@ Request Body:
 ```
 
 #### Delete Task
+
 ```
 DELETE /api/v1/tasks/{id}
 ```
 
 ### Notes
+
 - Replace `{id}` with the actual ID of the task when making requests to update or delete a specific task.
 - All endpoints return appropriate HTTP status codes to indicate the success or failure of the operation.
 - It is important to configure the my.cnf file to restrict remote connections to your database and only allow connections from specific IP addresses or ranges. This helps protect your database from unauthorized access.
