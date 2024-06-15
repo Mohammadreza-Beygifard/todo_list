@@ -16,10 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(TaskController.class)
 @AutoConfigureMockMvc(addFilters = false)
+@ActiveProfiles("test")
 public class TaskControllerTest {
 
   @Autowired private MockMvc mockMvc;
@@ -36,9 +38,9 @@ public class TaskControllerTest {
     task1 = new Task("Task1", false);
     task1.setId(1L);
     task2 = new Task("Task2", false);
-    task1.setId(2L);
+    task2.setId(2L);
     task3 = new Task("Task3", true);
-    task1.setId(3L);
+    task3.setId(3L);
     task_list = new ArrayList<>();
     task_list.add(task1);
     task_list.add(task2);
